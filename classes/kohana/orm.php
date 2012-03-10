@@ -32,8 +32,13 @@ class Kohana_ORM extends Model implements serializable {
 	public static function factory($model, $id = NULL)
 	{
 		// Set class name
-		$model = 'Model_'.ucfirst($model);
-
+		try
+		{
+		    return new $model($id);
+		}catch(Exception $e)
+		{
+		    $model = 'Model_'.ucfirst($model);
+		}
 		return new $model($id);
 	}
 
